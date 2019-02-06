@@ -9,43 +9,74 @@ import Cocoa
 import AppKit
 import WebKit
 
-class AuthViewController: NSViewController {
+var tokenStore = ""
 
-    @IBOutlet weak var webview: WKWebView!
+protocol AuthViewControllerDelegate: class {
+    func authorized()
+}
+
+final class AuthViewController: NSViewController {
+
+    private let apiClient = APIClient.shared
+
+    @IBOutlet private weak var webview: WKWebView!
+    @IBOutlet private weak var activityIndicator: NSProgressIndicator!
+
+    weak var delegate: AuthViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
+        activityIndicator.controlTint = .graphiteControlTint
         webview.navigationDelegate = self
-        let readPerm = AppConstants.Slack.PermissionScope.profileRead
+        let readPerm = AppConstants.Slack.PermissionScope.profileRead + " "
         let writePerm = AppConstants.Slack.PermissionScope.profileUserWrite
         let clientID = AppConstants.Slack.clientID
-        let base = AppConstants.Slack.URLs.base
         let redirect = AppConstants.Slack.authRedirect
-        let request = URLRequest(url: URL(string: "\(base)/oauth/authorize?client_id=\(clientID)&scope=\(readPerm)%20\(writePerm)&redirect_uri=\(redirect)")!)
+        let host = AppConstants.Slack.URLs.host
+        let scheme = AppConstants.Slack.URLs.scheme
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = "/oauth/authorize"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: "\(clientID)"),
+            URLQueryItem(name: "scope", value: "\(readPerm) \(writePerm)"),
+            URLQueryItem(name: "redirect_uri", value: "\(redirect)")
+        ]
+        let request = URLRequest(url: urlComponents.url!)
         webview.load(request)
     }
 
-    let urlSession = URLSession.shared
-
     func authorize(with code: String) {
-        let url = URL.init(string: "https://slack.com/api/oauth.access?code=\(code)&client_id=27006116208.539129783014&client_secret=7365bb8cd7734f5860010de51344c8a5&&redirect_uri=https%3A%2F%2Fexample.com")!
-        let urlRequest = URLRequest.init(url: url)
-        urlSession.dataTask(with: urlRequest) { (data, response, error) in
-            let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-            print(json)
-//            print(data)
-//            print(response)
-//            print(error)
-        }.resume()
+        webview.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimation(nil)
+        apiClient.authorize(with: code) { (result) in
+            switch result {
+            case let .success(token):
+                tokenStore = token.value
+            case let .failure(message):
+                print(message)
+            }
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimation(nil)
+                self.activityIndicator.isHidden = true
+                self.delegate?.authorized()
+            }
+        }
     }
+
 
 }
 
 extension AuthViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        let urlString = navigationAction.request.url?.absoluteString
+        print(urlString)
         if
-            let url = navigationAction.request.url?.absoluteString,
+            let url = urlString,
             url.contains("code="),
             let code = url.components(separatedBy: "code=")[1].components(separatedBy: "&").first
         {
@@ -59,11 +90,10 @@ extension AuthViewController: WKNavigationDelegate {
 }
 
 extension AuthViewController {
-    // MARK: Storyboard instantiation
     static func freshController() -> AuthViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
-        guard let viewController = storyboard.instantiateController(withIdentifier: "ViewController") as? AuthViewController else {
-            fatalError("Why cant i find QuotesViewController? - Check Main.storyboard")
+        guard let viewController = storyboard.instantiateController(withIdentifier: "AuthViewController") as? AuthViewController else {
+            fatalError()
         }
         return viewController
     }

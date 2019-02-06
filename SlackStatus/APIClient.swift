@@ -55,7 +55,7 @@ enum Result<Value> {
 }
 
 class APIClient {
-    let shared = APIClient()
+    static let shared = APIClient()
 
     typealias CodeResult = Result<String>
     typealias TokenResult = Result<Token>
@@ -79,7 +79,7 @@ class APIClient {
             } else {
                 handler(.failure("Unknown error while \(#function)"))
             }
-        }
+        }.resume()
     }
 
     func fetchProfile(handler: @escaping (ProfileResult) -> Void) {
@@ -93,7 +93,7 @@ class APIClient {
             } else {
                 handler(.failure("Unknown error while \(#function)"))
             }
-        }
+        }.resume()
     }
 
     func setStatus(with status: String, handler: () -> Void) {

@@ -13,12 +13,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
 
+    let authVC = AuthViewController.freshController()
+    let mainVC = MainViewController.freshController()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
             button.action = #selector(togglePopover(_:))
         }
-
-        popover.contentViewController = AuthViewController.freshController()
+        authVC.delegate = self
+        popover.contentViewController = authVC
     }
 
     @objc func togglePopover(_ sender: Any?) {
@@ -37,5 +40,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func closePopover(sender: Any?) {
         popover.performClose(sender)
+    }
+}
+
+extension AppDelegate: AuthViewControllerDelegate {
+    func authorized() {
+        popover.contentViewController = mainVC
     }
 }
