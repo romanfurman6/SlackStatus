@@ -44,7 +44,7 @@ playground.xcworkspace
 # Package.pins
 # Package.resolved
 .build/
-SlackStatus/AppConstants.swift
+SlackStatus/App/AppConstants.swift
 
 # CocoaPods
 #
