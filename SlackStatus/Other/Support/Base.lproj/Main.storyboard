@@ -689,18 +689,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="266" height="140"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ape-35-M4U">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ape-35-M4U">
                                 <rect key="frame" x="63" y="59" width="140" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="3Ye-jX-52C">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w0k-Zj-gWr">
-                                <rect key="frame" x="98" y="11" width="70" height="32"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0k-Zj-gWr">
+                                <rect key="frame" x="97" y="11" width="72" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="gZb-Td-uD5"/>
+                                    <constraint firstAttribute="width" constant="60" id="MD1-cr-6WB"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="N3z-1G-O2R">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -724,13 +725,10 @@
                             </progressIndicator>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="w0k-Zj-gWr" firstAttribute="top" secondItem="ape-35-M4U" secondAttribute="bottom" constant="20" id="2av-PJ-4td"/>
-                            <constraint firstItem="ape-35-M4U" firstAttribute="centerY" secondItem="0KX-Ns-zYX" secondAttribute="centerY" id="7lK-YZ-YUD"/>
-                            <constraint firstItem="ape-35-M4U" firstAttribute="centerX" secondItem="0KX-Ns-zYX" secondAttribute="centerX" id="F6q-pX-Yd6"/>
-                            <constraint firstItem="gGb-V0-w6r" firstAttribute="top" secondItem="0KX-Ns-zYX" secondAttribute="top" constant="20" id="J5m-lv-FZi"/>
-                            <constraint firstItem="ape-35-M4U" firstAttribute="leading" secondItem="0KX-Ns-zYX" secondAttribute="leading" constant="63" id="TsA-ah-5qV"/>
-                            <constraint firstAttribute="trailing" secondItem="ape-35-M4U" secondAttribute="trailing" constant="63" id="Vrn-aC-bex"/>
-                            <constraint firstItem="gGb-V0-w6r" firstAttribute="centerX" secondItem="0KX-Ns-zYX" secondAttribute="centerX" id="m7L-iA-dGT"/>
+                            <constraint firstAttribute="bottom" secondItem="w0k-Zj-gWr" secondAttribute="bottom" constant="18" id="9NZ-Gx-VWV"/>
+                            <constraint firstItem="gGb-V0-w6r" firstAttribute="top" secondItem="0KX-Ns-zYX" secondAttribute="top" constant="20" id="frE-I1-bo4"/>
+                            <constraint firstItem="w0k-Zj-gWr" firstAttribute="centerX" secondItem="0KX-Ns-zYX" secondAttribute="centerX" id="lGN-SQ-D1v"/>
+                            <constraint firstItem="gGb-V0-w6r" firstAttribute="centerX" secondItem="0KX-Ns-zYX" secondAttribute="centerX" id="sU3-gu-RAA"/>
                         </constraints>
                     </view>
                     <connections>
