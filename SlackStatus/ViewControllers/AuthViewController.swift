@@ -26,8 +26,6 @@ final class AuthViewController: NSViewController, MainStoryboardInit {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
-        activityIndicator.controlTint = .graphiteControlTint
         webview.navigationDelegate = self
     }
 
@@ -39,8 +37,7 @@ final class AuthViewController: NSViewController, MainStoryboardInit {
 
     private func authorize(with code: String) {
         webview.isHidden = true
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimation(nil)
+        isLoading(true)
         userService.authorize(with: code) { [weak self] (result) in
             switch result {
             case let .success(auth):
@@ -49,11 +46,19 @@ final class AuthViewController: NSViewController, MainStoryboardInit {
                 print(message)
             }
             DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimation(nil)
-                self?.activityIndicator.isHidden = true
+                self?.isLoading(false)
                 self?.delegate?.authorized()
             }
         }
+    }
+
+    private func isLoading(_ value: Bool) {
+        if value {
+            activityIndicator.startAnimation(nil)
+        } else {
+            activityIndicator.stopAnimation(nil)
+        }
+        activityIndicator.isHidden = !value
     }
 
 

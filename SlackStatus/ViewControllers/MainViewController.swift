@@ -13,10 +13,10 @@ protocol MainViewControllerDelegate: class {
 
 class MainViewController: NSViewController, MainStoryboardInit {
 
-    @IBOutlet weak var textField: NSTextField!
-    @IBOutlet weak var welcomeLabel: NSTextField!
-    @IBOutlet weak var activityIndicator: NSProgressIndicator!
-    @IBOutlet weak var saveButton: NSButton!
+    @IBOutlet private weak var textField: NSTextField!
+    @IBOutlet private weak var welcomeLabel: NSTextField!
+    @IBOutlet private weak var activityIndicator: NSProgressIndicator!
+    @IBOutlet private weak var saveButton: NSButton!
 
     weak var delegate: MainViewControllerDelegate?
 
