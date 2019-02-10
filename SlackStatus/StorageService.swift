@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KeychainAccess
 
 protocol StorageServiceProtocol {
     func clearKeychainStorage()
@@ -19,7 +18,7 @@ class StorageService: StorageServiceProtocol {
     private var keychainStorage: KeychainStorage
 
     init(
-        keychainStorage: KeychainStorage = Keychain(service: "SlackStatus")
+        keychainStorage: KeychainStorage
         ) {
         self.keychainStorage = keychainStorage
     }

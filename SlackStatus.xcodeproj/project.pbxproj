@@ -11,6 +11,10 @@
 		5F9DC97922108981004E2B63 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97822108981004E2B63 /* StorageService.swift */; };
 		5F9DC97C22108B70004E2B63 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */; };
 		5F9DC97E22108BA3004E2B63 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97D22108BA3004E2B63 /* Storage.swift */; };
+		5F9DC98022108C8F004E2B63 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97F22108C8F004E2B63 /* Dependencies.swift */; };
+		5F9DC9822210A1B1004E2B63 /* StoryboardInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */; };
+		5F9DC9842210A422004E2B63 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC9832210A422004E2B63 /* UserService.swift */; };
+		5F9DC9862210A539004E2B63 /* ApiTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC9852210A539004E2B63 /* ApiTarget.swift */; };
 		5FC699AB2202374500AF915F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC699AA2202374500AF915F /* AuthViewController.swift */; };
 		5FD4D5D1220B094E009F4470 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4D5D0220B094E009F4470 /* MainViewController.swift */; };
 		5FD4D5D4220B0A23009F4470 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4D5D3220B0A23009F4470 /* APIClient.swift */; };
@@ -24,6 +28,10 @@
 		5F9DC97822108981004E2B63 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/Mac/KeychainAccess.framework; sourceTree = "<group>"; };
 		5F9DC97D22108BA3004E2B63 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		5F9DC97F22108C8F004E2B63 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInit.swift; sourceTree = "<group>"; };
+		5F9DC9832210A422004E2B63 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5F9DC9852210A539004E2B63 /* ApiTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTarget.swift; sourceTree = "<group>"; };
 		5FC699AA2202374500AF915F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		5FD4D5D0220B094E009F4470 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5FD4D5D3220B0A23009F4470 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -94,6 +102,10 @@
 				5F9DC97622108830004E2B63 /* AppConstants.swift */,
 				5F9DC97822108981004E2B63 /* StorageService.swift */,
 				5F9DC97D22108BA3004E2B63 /* Storage.swift */,
+				5F9DC97F22108C8F004E2B63 /* Dependencies.swift */,
+				5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */,
+				5F9DC9832210A422004E2B63 /* UserService.swift */,
+				5F9DC9852210A539004E2B63 /* ApiTarget.swift */,
 			);
 			path = SlackStatus;
 			sourceTree = "<group>";
@@ -197,8 +209,12 @@
 			files = (
 				5FD4D5D1220B094E009F4470 /* MainViewController.swift in Sources */,
 				5F9DC97E22108BA3004E2B63 /* Storage.swift in Sources */,
+				5F9DC9822210A1B1004E2B63 /* StoryboardInit.swift in Sources */,
 				5F9DC97922108981004E2B63 /* StorageService.swift in Sources */,
+				5F9DC9862210A539004E2B63 /* ApiTarget.swift in Sources */,
 				5FC699AB2202374500AF915F /* AuthViewController.swift in Sources */,
+				5F9DC98022108C8F004E2B63 /* Dependencies.swift in Sources */,
+				5F9DC9842210A422004E2B63 /* UserService.swift in Sources */,
 				5FFC76A6220233E000F6099E /* AppDelegate.swift in Sources */,
 				5FD4D5D4220B0A23009F4470 /* APIClient.swift in Sources */,
 				5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */,

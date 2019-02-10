@@ -718,6 +718,10 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="AjN-K5-UWM">
+                                <rect key="frame" x="211" y="62" width="16" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstItem="w0k-Zj-gWr" firstAttribute="top" secondItem="ape-35-M4U" secondAttribute="bottom" constant="20" id="2av-PJ-4td"/>
@@ -730,6 +734,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="AjN-K5-UWM" id="dZV-cI-Roa"/>
+                        <outlet property="saveButton" destination="w0k-Zj-gWr" id="Q5z-no-Kj4"/>
                         <outlet property="textField" destination="ape-35-M4U" id="c3v-oS-sUF"/>
                         <outlet property="welcomeLabel" destination="gGb-V0-w6r" id="czc-qc-Llc"/>
                     </connections>
@@ -744,18 +750,18 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AuthViewController" id="XfG-lQ-9wD" customClass="AuthViewController" customModule="SlackStatus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="523" height="325"/>
+                        <rect key="frame" x="0.0" y="0.0" width="523" height="540"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01k-Mk-zR0">
-                                <rect key="frame" x="0.0" y="0.0" width="523" height="325"/>
+                                <rect key="frame" x="0.0" y="0.0" width="523" height="540"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0fL-Wf-08j">
-                                <rect key="frame" x="254" y="155" width="16" height="16"/>
+                                <rect key="frame" x="254" y="262" width="16" height="16"/>
                             </progressIndicator>
                         </subviews>
                         <constraints>
@@ -773,7 +779,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="186.5" y="717.5"/>
+            <point key="canvasLocation" x="186.5" y="825"/>
         </scene>
     </scenes>
 </document>

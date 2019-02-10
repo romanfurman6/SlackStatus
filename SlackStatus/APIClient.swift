@@ -7,18 +7,23 @@
 
 import Foundation
 
-struct Token {
-    let value: String
+struct Auth {
+    let accessToken: String
 }
 
-extension Token: Decodable {
+extension Auth: Codable {
     enum CodingKeys: String, CodingKey {
-        case value = "access_token"
+        case accessToken = "access_token"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.decode(String.self, forKey: .value)
+        accessToken = try container.decode(String.self, forKey: .accessToken)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(accessToken, forKey: .accessToken)
     }
 }
 
@@ -36,68 +41,52 @@ extension Profile: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let response = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
-        name = try response.decode(String.self, forKey: .name)
-        status = try response.decode(String.self, forKey: .status)
+        let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
+        name = try nestedContainer.decode(String.self, forKey: .name)
+        status = try nestedContainer.decode(String.self, forKey: .status)
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(status, forKey: .status)
+        var nestedContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
+        try nestedContainer.encode(name, forKey: .name)
+        try nestedContainer.encode(status, forKey: .status)
     }
 
 }
 
-enum Result<Value> {
-    case success(Value)
-    case failure(String)
+protocol APIClientProtocol {
+    func request<T: Codable>(wirh request: URLRequest, handler: @escaping (Result<T>) -> Void)
 }
 
-class APIClient {
-    static let shared = APIClient()
+class APIClient: APIClientProtocol {
 
-    typealias CodeResult = Result<String>
-    typealias TokenResult = Result<Token>
-    typealias ProfileResult = Result<Profile>
+    enum Result<Value> {
+        case success(Value)
+        case failure(String)
+    }
 
+    private let storageService: StorageServiceProtocol
     private let urlSession = URLSession.shared
 
-    func authorize(with code: String, handler: @escaping (TokenResult) -> Void) {
+    init() {
+        self.storageService = dependencies.storageService
+    }
 
-        let clientSecret = AppConstants.Slack.clientSecret
-        let clientID = AppConstants.Slack.clientID
-        let base = AppConstants.Slack.URLs.base
-        let redirect = AppConstants.Slack.authRedirect
-        let url = URL(string: "\(base)/api/oauth.access?code=\(code)&client_id=\(clientID)&client_secret=\(clientSecret)&redirect_uri=\(redirect)")!
+    func request<T: Codable>(wirh request: URLRequest, handler: @escaping (Result<T>) -> Void) {
         let decoder = JSONDecoder()
-        urlSession.dataTask(with: url) { (data, _, error) in
+        urlSession.dataTask(with: request) { (data, _, error) in
             if let error = error {
                 handler(.failure(error.localizedDescription))
-            } else if let data = data, let token = try? decoder.decode(Token.self, from: data) {
-                handler(.success(token))
+            } else if let data = data {
+                if let profile = try? decoder.decode(T.self, from: data) {
+                    handler(.success(profile))
+                } else if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+                    handler(.failure("Mapping error while \(#function) \(json)"))
+                }
             } else {
                 handler(.failure("Unknown error while \(#function)"))
             }
-        }.resume()
+            }.resume()
     }
-
-    func fetchProfile(handler: @escaping (ProfileResult) -> Void) {
-        let url = URL(string: "https://slack.com/api/users.profile.get")!
-        let decoder = JSONDecoder()
-        urlSession.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                handler(.failure(error.localizedDescription))
-            } else if let data = data, let profile = try? decoder.decode(Profile.self, from: data) {
-                handler(.success(profile))
-            } else {
-                handler(.failure("Unknown error while \(#function)"))
-            }
-        }.resume()
-    }
-
-    func setStatus(with status: String, handler: () -> Void) {
-
-    }
-
 }

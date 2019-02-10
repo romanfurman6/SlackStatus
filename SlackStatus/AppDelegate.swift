@@ -13,15 +13,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
 
-    let authVC = AuthViewController.freshController()
-    let mainVC = MainViewController.freshController()
+    let authVC = AuthViewController.initFromStoryboard()
+    let mainVC = MainViewController.initFromStoryboard()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
             button.action = #selector(togglePopover(_:))
         }
         authVC.delegate = self
-        popover.contentViewController = authVC
+        mainVC.delegate = self
+        if let token: Auth = dependencies.storageService.getObject(at: AppConstants.Keychain.token) {
+            print(token)
+            popover.contentViewController = mainVC
+        } else {
+            popover.contentViewController = authVC
+        }
+
     }
 
     @objc func togglePopover(_ sender: Any?) {
@@ -48,3 +55,11 @@ extension AppDelegate: AuthViewControllerDelegate {
         popover.contentViewController = mainVC
     }
 }
+
+extension AppDelegate: MainViewControllerDelegate {
+    func settedProfile() {
+        closePopover(sender: nil)
+    }
+}
+
+let dependencies = Dependencies()
