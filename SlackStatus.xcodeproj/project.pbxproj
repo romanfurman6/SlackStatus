@@ -63,6 +63,63 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5F9DC9872210ABC3004E2B63 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5FC699AA2202374500AF915F /* AuthViewController.swift */,
+				5FD4D5D0220B094E009F4470 /* MainViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5F9DC9882210ABD0004E2B63 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5F9DC97822108981004E2B63 /* StorageService.swift */,
+				5F9DC9832210A422004E2B63 /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5F9DC9892210ABD7004E2B63 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5F9DC9852210A539004E2B63 /* ApiTarget.swift */,
+				5FD4D5D3220B0A23009F4470 /* APIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		5F9DC98A2210ABE9004E2B63 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5FFC76A5220233E000F6099E /* AppDelegate.swift */,
+				5F9DC97622108830004E2B63 /* AppConstants.swift */,
+				5F9DC97F22108C8F004E2B63 /* Dependencies.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5F9DC98B2210ABFD004E2B63 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5F9DC97D22108BA3004E2B63 /* Storage.swift */,
+				5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5F9DC98C2210AC0F004E2B63 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				5F9DC9882210ABD0004E2B63 /* Services */,
+				5F9DC98B2210ABFD004E2B63 /* Protocols */,
+				5F9DC9892210ABD7004E2B63 /* Networking */,
+				5FD4D5D2220B0997009F4470 /* Support */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		5FD4D5D2220B0997009F4470 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,18 +151,9 @@
 		5FFC76A4220233E000F6099E /* SlackStatus */ = {
 			isa = PBXGroup;
 			children = (
-				5FD4D5D2220B0997009F4470 /* Support */,
-				5FFC76A5220233E000F6099E /* AppDelegate.swift */,
-				5FC699AA2202374500AF915F /* AuthViewController.swift */,
-				5FD4D5D0220B094E009F4470 /* MainViewController.swift */,
-				5FD4D5D3220B0A23009F4470 /* APIClient.swift */,
-				5F9DC97622108830004E2B63 /* AppConstants.swift */,
-				5F9DC97822108981004E2B63 /* StorageService.swift */,
-				5F9DC97D22108BA3004E2B63 /* Storage.swift */,
-				5F9DC97F22108C8F004E2B63 /* Dependencies.swift */,
-				5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */,
-				5F9DC9832210A422004E2B63 /* UserService.swift */,
-				5F9DC9852210A539004E2B63 /* ApiTarget.swift */,
+				5F9DC98A2210ABE9004E2B63 /* App */,
+				5F9DC9872210ABC3004E2B63 /* ViewControllers */,
+				5F9DC98C2210AC0F004E2B63 /* Other */,
 			);
 			path = SlackStatus;
 			sourceTree = "<group>";
@@ -354,7 +402,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlackStatus/Support/SlackStatus.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SlackStatus/Other/Support/SlackStatus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 29286X6DM7;
@@ -362,7 +410,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Support/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Other/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -377,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlackStatus/Support/SlackStatus.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SlackStatus/Other/Support/SlackStatus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 29286X6DM7;
@@ -385,7 +433,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Support/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Other/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
