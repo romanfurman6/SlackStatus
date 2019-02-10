@@ -7,20 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97622108830004E2B63 /* AppConstants.swift */; };
+		5F9DC97922108981004E2B63 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97822108981004E2B63 /* StorageService.swift */; };
+		5F9DC97C22108B70004E2B63 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */; };
+		5F9DC97E22108BA3004E2B63 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97D22108BA3004E2B63 /* Storage.swift */; };
 		5FC699AB2202374500AF915F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC699AA2202374500AF915F /* AuthViewController.swift */; };
 		5FD4D5D1220B094E009F4470 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4D5D0220B094E009F4470 /* MainViewController.swift */; };
 		5FD4D5D4220B0A23009F4470 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4D5D3220B0A23009F4470 /* APIClient.swift */; };
-		5FD4D5D6220B0A38009F4470 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4D5D5220B0A38009F4470 /* AppConstants.swift */; };
 		5FFC76A6220233E000F6099E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFC76A5220233E000F6099E /* AppDelegate.swift */; };
 		5FFC76AA220233E100F6099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FFC76A9220233E100F6099E /* Assets.xcassets */; };
 		5FFC76AD220233E100F6099E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FFC76AB220233E100F6099E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F9DC97622108830004E2B63 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		5F9DC97822108981004E2B63 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/Mac/KeychainAccess.framework; sourceTree = "<group>"; };
+		5F9DC97D22108BA3004E2B63 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		5FC699AA2202374500AF915F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		5FD4D5D0220B094E009F4470 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5FD4D5D3220B0A23009F4470 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		5FD4D5D5220B0A38009F4470 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		5FFC76A2220233E000F6099E /* SlackStatus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackStatus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FFC76A5220233E000F6099E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FFC76A9220233E100F6099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,12 +40,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F9DC97C22108B70004E2B63 /* KeychainAccess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F9DC97A22108B70004E2B63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5FD4D5D2220B0997009F4470 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +71,7 @@
 			children = (
 				5FFC76A4220233E000F6099E /* SlackStatus */,
 				5FFC76A3220233E000F6099E /* Products */,
+				5F9DC97A22108B70004E2B63 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,7 +91,9 @@
 				5FC699AA2202374500AF915F /* AuthViewController.swift */,
 				5FD4D5D0220B094E009F4470 /* MainViewController.swift */,
 				5FD4D5D3220B0A23009F4470 /* APIClient.swift */,
-				5FD4D5D5220B0A38009F4470 /* AppConstants.swift */,
+				5F9DC97622108830004E2B63 /* AppConstants.swift */,
+				5F9DC97822108981004E2B63 /* StorageService.swift */,
+				5F9DC97D22108BA3004E2B63 /* Storage.swift */,
 			);
 			path = SlackStatus;
 			sourceTree = "<group>";
@@ -90,6 +108,7 @@
 				5FFC769E220233E000F6099E /* Sources */,
 				5FFC769F220233E000F6099E /* Frameworks */,
 				5FFC76A0220233E000F6099E /* Resources */,
+				5F9DC9732210879B004E2B63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -149,16 +168,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5F9DC9732210879B004E2B63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/KeychainAccess.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5FFC769E220233E000F6099E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5FD4D5D1220B094E009F4470 /* MainViewController.swift in Sources */,
+				5F9DC97E22108BA3004E2B63 /* Storage.swift in Sources */,
+				5F9DC97922108981004E2B63 /* StorageService.swift in Sources */,
 				5FC699AB2202374500AF915F /* AuthViewController.swift in Sources */,
 				5FFC76A6220233E000F6099E /* AppDelegate.swift in Sources */,
 				5FD4D5D4220B0A23009F4470 /* APIClient.swift in Sources */,
-				5FD4D5D6220B0A38009F4470 /* AppConstants.swift in Sources */,
+				5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +342,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 29286X6DM7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -318,6 +365,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 29286X6DM7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/SlackStatus/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

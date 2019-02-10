@@ -30,7 +30,7 @@ final class AuthViewController: NSViewController {
         activityIndicator.controlTint = .graphiteControlTint
         webview.navigationDelegate = self
         let readPerm = AppConstants.Slack.PermissionScope.profileRead + " "
-        let writePerm = AppConstants.Slack.PermissionScope.profileUserWrite
+        let writePerm = AppConstants.Slack.PermissionScope.profileWrite
         let clientID = AppConstants.Slack.clientID
         let redirect = AppConstants.Slack.authRedirect
         let host = AppConstants.Slack.URLs.host
