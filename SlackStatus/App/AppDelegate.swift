@@ -18,6 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
+            let image = NSImage(named: NSImage.Name("slack"))
+            button.image = image
             button.action = #selector(togglePopover(_:))
         }
         authVC.delegate = self

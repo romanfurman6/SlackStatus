@@ -13,10 +13,11 @@ class Dependencies {
     let storageService: StorageServiceProtocol
     let userService: UserServiceProtocol
 
-    private let keychain: KeychainStorage
     init() {
-        self.keychain = Keychain(service: "SlackStatus")
+        let keychain = Keychain(service: "SlackStatus")
         self.storageService = StorageService(keychainStorage: keychain)
-        self.userService = UserService(storageService: storageService, apiClient: APIClient())
+
+        let apiClient = APIClient()
+        self.userService = UserService(storageService: storageService, apiClient: apiClient)
     }
 }

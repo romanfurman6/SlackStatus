@@ -66,12 +66,7 @@ class APIClient: APIClientProtocol {
         case failure(String)
     }
 
-    private let storageService: StorageServiceProtocol
     private let urlSession = URLSession.shared
-
-    init() {
-        self.storageService = dependencies.storageService
-    }
 
     func request<T: Codable>(wirh request: URLRequest, handler: @escaping (Result<T>) -> Void) {
         let decoder = JSONDecoder()

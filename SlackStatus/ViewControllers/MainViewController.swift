@@ -72,8 +72,10 @@ class MainViewController: NSViewController, MainStoryboardInit {
     }
 
     private func handleProfile(_ profile: Profile) {
-        welcomeLabel.stringValue = "Hello, " + (profile.name)
-        textField.stringValue = profile.status
+        DispatchQueue.main.async {
+            self.welcomeLabel.stringValue = "Hello, " + (profile.name)
+            self.textField.stringValue = profile.status
+        }
         storage.storeObject(profile, for: AppConstants.Keychain.profile)
     }
 
