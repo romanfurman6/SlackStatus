@@ -7,8 +7,17 @@
 
 import AppKit
 
+let array = [
+    StatusView.Model(title: "first", emoji: "😭"),
+    StatusView.Model(title: "second", emoji: "😭"),
+    StatusView.Model(title: "third", emoji: "😭"),
+    StatusView.Model(title: "fourth", emoji: "😭"),
+    StatusView.Model(title: "fifth", emoji: "😭"),
+    StatusView.Model(title: "sixth", emoji: "😭")
+]
+
 protocol MainViewControllerDelegate: class {
-    func settedProfile()
+    func didFinish()
 }
 
 class MainViewController: NSViewController, MainStoryboardInit {
@@ -17,15 +26,20 @@ class MainViewController: NSViewController, MainStoryboardInit {
     @IBOutlet private weak var welcomeLabel: NSTextField!
     @IBOutlet private weak var activityIndicator: NSProgressIndicator!
     @IBOutlet private weak var saveButton: NSButton!
+    @IBOutlet private weak var closeButton: NSButton!
+    @IBOutlet private weak var leftStatusStackView: NSStackView!
+    @IBOutlet private weak var rightStatusStackView: NSStackView!
 
     weak var delegate: MainViewControllerDelegate?
 
     private let storage: StorageServiceProtocol = dependencies.storageService
-    private var profile: Profile?
     private let userService: UserServiceProtocol = dependencies.userService
+
+    private var profile: Profile?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupStackViews()
     }
 
     override func viewDidAppear() {
@@ -33,14 +47,27 @@ class MainViewController: NSViewController, MainStoryboardInit {
         fetchProfile()
     }
 
+    func setupStackViews() {
+        array.enumerated().forEach { (offset, model) in
+            let view = StatusView.initFromNIB()
+            view.configure(with: model)
+            if offset % 2 == 0 {
+                leftStatusStackView.addArrangedSubview(view)
+            } else {
+                rightStatusStackView.addArrangedSubview(view)
+            }
+        }
+    }
 
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        delegate?.didFinish()
+    }
     @IBAction func saveButtonTapped(_ sender: Any) {
         setStatus(with: textField.stringValue)
     }
 
     private func setStatus(with status: String) {
         isLoading(true)
-        profile?.status = status
         guard let profile = profile else { fatalError() }
         userService.updateProfile(with: profile) { [weak self] (result) in
             switch result {
@@ -50,7 +77,7 @@ class MainViewController: NSViewController, MainStoryboardInit {
                 print("Error response: \(message)")
             }
             DispatchQueue.main.async {
-                self?.delegate?.settedProfile()
+                self?.delegate?.didFinish()
                 self?.isLoading(false)
             }
         }
@@ -72,6 +99,7 @@ class MainViewController: NSViewController, MainStoryboardInit {
     }
 
     private func handleProfile(_ profile: Profile) {
+        self.profile = profile
         DispatchQueue.main.async {
             self.welcomeLabel.stringValue = "Hello, " + (profile.name)
             self.textField.stringValue = profile.status
@@ -84,7 +112,6 @@ class MainViewController: NSViewController, MainStoryboardInit {
         saveButton.isEnabled = !value
         if value {
             activityIndicator.startAnimation(nil)
-
         } else {
             activityIndicator.stopAnimation(nil)
         }

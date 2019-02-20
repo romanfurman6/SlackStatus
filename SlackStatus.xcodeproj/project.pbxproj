@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F150196221DFCEB0032AB0B /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F150195221DFCEB0032AB0B /* StatusView.swift */; };
+		5F150198221DFD0B0032AB0B /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F150197221DFD0B0032AB0B /* StatusView.xib */; };
+		5F15019A221E00710032AB0B /* NibInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F150199221E00710032AB0B /* NibInit.swift */; };
 		5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97622108830004E2B63 /* AppConstants.swift */; };
 		5F9DC97922108981004E2B63 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97822108981004E2B63 /* StorageService.swift */; };
 		5F9DC97C22108B70004E2B63 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F150195221DFCEB0032AB0B /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		5F150197221DFD0B0032AB0B /* StatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusView.xib; sourceTree = "<group>"; };
+		5F150199221E00710032AB0B /* NibInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInit.swift; sourceTree = "<group>"; };
 		5F9DC97622108830004E2B63 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		5F9DC97822108981004E2B63 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/Mac/KeychainAccess.framework; sourceTree = "<group>"; };
@@ -55,6 +61,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F150194221DFCCB0032AB0B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5FD4D5D0220B094E009F4470 /* MainViewController.swift */,
+				5F150195221DFCEB0032AB0B /* StatusView.swift */,
+				5F150197221DFD0B0032AB0B /* StatusView.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		5F9DC97A22108B70004E2B63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,8 +82,8 @@
 		5F9DC9872210ABC3004E2B63 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5F150194221DFCCB0032AB0B /* Main */,
 				5FC699AA2202374500AF915F /* AuthViewController.swift */,
-				5FD4D5D0220B094E009F4470 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -105,6 +121,7 @@
 			children = (
 				5F9DC97D22108BA3004E2B63 /* Storage.swift */,
 				5F9DC9812210A1B1004E2B63 /* StoryboardInit.swift */,
+				5F150199221E00710032AB0B /* NibInit.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -221,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F150198221DFD0B0032AB0B /* StatusView.xib in Resources */,
 				5FFC76AA220233E100F6099E /* Assets.xcassets in Resources */,
 				5FFC76AD220233E100F6099E /* Main.storyboard in Resources */,
 			);
@@ -257,6 +275,7 @@
 			files = (
 				5FD4D5D1220B094E009F4470 /* MainViewController.swift in Sources */,
 				5F9DC97E22108BA3004E2B63 /* Storage.swift in Sources */,
+				5F150196221DFCEB0032AB0B /* StatusView.swift in Sources */,
 				5F9DC9822210A1B1004E2B63 /* StoryboardInit.swift in Sources */,
 				5F9DC97922108981004E2B63 /* StorageService.swift in Sources */,
 				5F9DC9862210A539004E2B63 /* ApiTarget.swift in Sources */,
@@ -264,6 +283,7 @@
 				5F9DC98022108C8F004E2B63 /* Dependencies.swift in Sources */,
 				5F9DC9842210A422004E2B63 /* UserService.swift in Sources */,
 				5FFC76A6220233E000F6099E /* AppDelegate.swift in Sources */,
+				5F15019A221E00710032AB0B /* NibInit.swift in Sources */,
 				5FD4D5D4220B0A23009F4470 /* APIClient.swift in Sources */,
 				5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */,
 			);

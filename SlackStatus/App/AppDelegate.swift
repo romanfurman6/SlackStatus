@@ -59,7 +59,7 @@ extension AppDelegate: AuthViewControllerDelegate {
 }
 
 extension AppDelegate: MainViewControllerDelegate {
-    func settedProfile() {
+    func didFinish() {
         closePopover(sender: nil)
     }
 }
