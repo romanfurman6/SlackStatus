@@ -749,6 +749,23 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJ2-lA-4Qc">
+                                <rect key="frame" x="51" y="144" width="10" height="18"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="bYu-Pz-t3x">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ph9-Fg-fn2">
+                                <rect key="frame" x="33" y="143" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="bPm-He-fEg">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="gGb-V0-w6r" firstAttribute="centerX" secondItem="0KX-Ns-zYX" secondAttribute="centerX" id="UiU-m1-cuB"/>
@@ -758,7 +775,9 @@
                     <connections>
                         <outlet property="activityIndicator" destination="AjN-K5-UWM" id="dZV-cI-Roa"/>
                         <outlet property="closeButton" destination="qSV-YB-uKG" id="IjV-9j-HUB"/>
+                        <outlet property="emojiButton" destination="ph9-Fg-fn2" id="nEu-ka-XXR"/>
                         <outlet property="emojiLabel" destination="kOP-AB-ctQ" id="vpr-Zi-Szy"/>
+                        <outlet property="fakeTextField" destination="rJ2-lA-4Qc" id="YIp-XZ-Kyv"/>
                         <outlet property="leftStatusStackView" destination="YXG-5Q-I3g" id="uc2-sf-i5n"/>
                         <outlet property="rightStatusStackView" destination="odQ-Dh-wQe" id="i4I-Nu-qDN"/>
                         <outlet property="saveButton" destination="w0k-Zj-gWr" id="Q5z-no-Kj4"/>

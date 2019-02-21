@@ -30,6 +30,8 @@ class MainViewController: NSViewController, MainStoryboardInit {
     @IBOutlet private weak var leftStatusStackView: NSStackView!
     @IBOutlet private weak var rightStatusStackView: NSStackView!
     @IBOutlet private weak var emojiLabel: NSTextField!
+    @IBOutlet private weak var emojiButton: NSButton!
+    @IBOutlet private weak var fakeTextField: NSTextField!
 
     weak var delegate: MainViewControllerDelegate?
 
@@ -41,6 +43,8 @@ class MainViewController: NSViewController, MainStoryboardInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViews()
+        fakeTextField.alphaValue = 0
+        emojiButton.action = #selector(emojiButtonPressed(button:))
         emojiLabel.usesSingleLineMode = true
         emojiLabel.alignment = NSTextAlignment.center
     }
@@ -73,6 +77,17 @@ class MainViewController: NSViewController, MainStoryboardInit {
     @IBAction func closeButtonTapped(_ sender: Any) {
         delegate?.didFinish()
     }
+
+    @objc func emojiButtonPressed(button: NSButton) {
+        textField.window?.makeFirstResponder(nil)
+        fakeTextField.stringValue = " "
+        fakeTextField.becomeFirstResponder()
+        openEmojiPicker()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+//
+//        })
+    }
+
     @IBAction func saveButtonTapped(_ sender: Any) {
 //        textField.window?.makeFirstResponder(nil)
 //        emojiLabel.isEditable = true
