@@ -29,7 +29,9 @@ extension Auth: Codable {
 
 struct Profile {
     let name: String
+    var emoji: String
     var status: String
+    var expiration: Int
 }
 
 extension Profile: Codable {
@@ -37,6 +39,8 @@ extension Profile: Codable {
         case profile
         case name = "display_name"
         case status = "status_text"
+        case emoji = "status_emoji"
+        case expiration = "status_expiration"
     }
 
     init(from decoder: Decoder) throws {
@@ -44,6 +48,8 @@ extension Profile: Codable {
         let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
         name = try nestedContainer.decode(String.self, forKey: .name)
         status = try nestedContainer.decode(String.self, forKey: .status)
+        emoji = slackToUnicode(with: try nestedContainer.decode(String.self, forKey: .emoji)) ?? "🚫"
+        expiration = try nestedContainer.decode(Int.self, forKey: .expiration)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -51,8 +57,31 @@ extension Profile: Codable {
         var nestedContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
         try nestedContainer.encode(name, forKey: .name)
         try nestedContainer.encode(status, forKey: .status)
+        try nestedContainer.encode(emoji, forKey: .emoji)
+        try nestedContainer.encode(expiration, forKey: .expiration)
     }
 
+}
+
+private func slackToUnicode(with value: String) -> String? {
+
+    if let path = Bundle.main.path(forResource: "slack_to_unicode", ofType: "json") {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            let dictionary = json as! [String: String]
+            guard
+                let emojiUnicode = dictionary[value],
+                let charCode = UInt32(emojiUnicode, radix: 16),
+                let unicode = UnicodeScalar(charCode)
+            else { return nil }
+
+            return String(unicode)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    return nil
 }
 
 protocol APIClientProtocol {

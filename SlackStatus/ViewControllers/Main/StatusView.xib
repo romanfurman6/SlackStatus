@@ -23,16 +23,28 @@
                         <action selector="statusText:" target="-1" id="9jf-8k-OHa"/>
                     </connections>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="2yL-d7-02a">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="22"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="w8I-kh-bfI">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="euM-yJ-s9F" secondAttribute="trailing" id="7v6-Po-7aG"/>
                 <constraint firstItem="euM-yJ-s9F" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="861-4i-PDH"/>
+                <constraint firstItem="2yL-d7-02a" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="Ak9-Jx-vdJ"/>
+                <constraint firstItem="2yL-d7-02a" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="GTV-pM-rwl"/>
                 <constraint firstItem="euM-yJ-s9F" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="Suz-sP-otw"/>
+                <constraint firstAttribute="bottom" secondItem="2yL-d7-02a" secondAttribute="bottom" id="d0N-k9-dYT"/>
+                <constraint firstAttribute="trailing" secondItem="2yL-d7-02a" secondAttribute="trailing" id="ylz-BN-moa"/>
             </constraints>
             <connections>
+                <outlet property="button" destination="2yL-d7-02a" id="hPW-X1-Qf0"/>
                 <outlet property="statusTextLabel" destination="euM-yJ-s9F" id="6X2-UL-uVB"/>
             </connections>
-            <point key="canvasLocation" x="140" y="153.5"/>
+            <point key="canvasLocation" x="140" y="153"/>
         </customView>
     </objects>
 </document>

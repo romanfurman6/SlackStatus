@@ -10,6 +10,7 @@
 		5F150196221DFCEB0032AB0B /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F150195221DFCEB0032AB0B /* StatusView.swift */; };
 		5F150198221DFD0B0032AB0B /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F150197221DFD0B0032AB0B /* StatusView.xib */; };
 		5F15019A221E00710032AB0B /* NibInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F150199221E00710032AB0B /* NibInit.swift */; };
+		5F15019C221E303C0032AB0B /* slack_to_unicode.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F15019B221E303C0032AB0B /* slack_to_unicode.json */; };
 		5F9DC97722108830004E2B63 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97622108830004E2B63 /* AppConstants.swift */; };
 		5F9DC97922108981004E2B63 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9DC97822108981004E2B63 /* StorageService.swift */; };
 		5F9DC97C22108B70004E2B63 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */; };
@@ -30,6 +31,7 @@
 		5F150195221DFCEB0032AB0B /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		5F150197221DFD0B0032AB0B /* StatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusView.xib; sourceTree = "<group>"; };
 		5F150199221E00710032AB0B /* NibInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInit.swift; sourceTree = "<group>"; };
+		5F15019B221E303C0032AB0B /* slack_to_unicode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = slack_to_unicode.json; sourceTree = "<group>"; };
 		5F9DC97622108830004E2B63 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		5F9DC97822108981004E2B63 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		5F9DC97B22108B70004E2B63 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/Mac/KeychainAccess.framework; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				5FFC76A9220233E100F6099E /* Assets.xcassets */,
+				5F15019B221E303C0032AB0B /* slack_to_unicode.json */,
 				5FFC76AB220233E100F6099E /* Main.storyboard */,
 				5FFC76AE220233E100F6099E /* Info.plist */,
 				5FFC76AF220233E100F6099E /* SlackStatus.entitlements */,
@@ -241,6 +244,7 @@
 				5F150198221DFD0B0032AB0B /* StatusView.xib in Resources */,
 				5FFC76AA220233E100F6099E /* Assets.xcassets in Resources */,
 				5FFC76AD220233E100F6099E /* Main.storyboard in Resources */,
+				5F15019C221E303C0032AB0B /* slack_to_unicode.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

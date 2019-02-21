@@ -13,6 +13,7 @@ class StatusView: NSView, NibInit {
         let title: String
         let emoji: String
     }
+    @IBOutlet weak var button: NSButton!
 
     @IBOutlet private weak var statusTextLabel: NSTextField!
 

@@ -8,12 +8,12 @@
 import AppKit
 
 let array = [
-    StatusView.Model(title: "first", emoji: "😭"),
-    StatusView.Model(title: "second", emoji: "😭"),
-    StatusView.Model(title: "third", emoji: "😭"),
-    StatusView.Model(title: "fourth", emoji: "😭"),
-    StatusView.Model(title: "fifth", emoji: "😭"),
-    StatusView.Model(title: "sixth", emoji: "😭")
+    StatusView.Model(title: "Home", emoji: "🏡"),
+    StatusView.Model(title: "On the way", emoji: "🚙"),
+    StatusView.Model(title: "Lunch", emoji: "🥪"),
+    StatusView.Model(title: "Meeting", emoji: "🤙"),
+    StatusView.Model(title: "Vacation", emoji: "🏖"),
+    StatusView.Model(title: "Office", emoji: "🏢")
 ]
 
 protocol MainViewControllerDelegate: class {
@@ -29,6 +29,7 @@ class MainViewController: NSViewController, MainStoryboardInit {
     @IBOutlet private weak var closeButton: NSButton!
     @IBOutlet private weak var leftStatusStackView: NSStackView!
     @IBOutlet private weak var rightStatusStackView: NSStackView!
+    @IBOutlet private weak var emojiLabel: NSTextField!
 
     weak var delegate: MainViewControllerDelegate?
 
@@ -40,6 +41,8 @@ class MainViewController: NSViewController, MainStoryboardInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViews()
+        emojiLabel.usesSingleLineMode = true
+        emojiLabel.alignment = NSTextAlignment.center
     }
 
     override func viewDidAppear() {
@@ -56,18 +59,33 @@ class MainViewController: NSViewController, MainStoryboardInit {
             } else {
                 rightStatusStackView.addArrangedSubview(view)
             }
+            view.button.tag = offset
+            view.button.action = #selector(buttonPressed(button:))
         }
+    }
+
+    @objc func buttonPressed(button: NSButton) {
+        let item = array[button.tag]
+        textField.stringValue = item.title
+        emojiLabel.stringValue = item.emoji
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
         delegate?.didFinish()
     }
     @IBAction func saveButtonTapped(_ sender: Any) {
-        setStatus(with: textField.stringValue)
+//        textField.window?.makeFirstResponder(nil)
+//        emojiLabel.isEditable = true
+//        emojiLabel.focusRingType = .none
+//        emojiLabel.becomeFirstResponder()
+        setStatus(with: textField.stringValue, and: emojiLabel.stringValue)
     }
 
-    private func setStatus(with status: String) {
+    private func setStatus(with status: String, and emoji: String) {
         isLoading(true)
+        profile?.status = status
+        profile?.emoji = emoji
+        profile?.expiration = 0
         guard let profile = profile else { fatalError() }
         userService.updateProfile(with: profile) { [weak self] (result) in
             switch result {
@@ -103,6 +121,7 @@ class MainViewController: NSViewController, MainStoryboardInit {
         DispatchQueue.main.async {
             self.welcomeLabel.stringValue = "Hello, " + (profile.name)
             self.textField.stringValue = profile.status
+            self.emojiLabel.stringValue = profile.emoji
         }
         storage.storeObject(profile, for: AppConstants.Keychain.profile)
     }
@@ -117,4 +136,16 @@ class MainViewController: NSViewController, MainStoryboardInit {
         }
     }
     
+}
+
+private func openEmojiPicker() {
+    let commandControlMask = (CGEventFlags.maskCommand.rawValue | CGEventFlags.maskControl.rawValue)
+    let commandControlMaskFlags = CGEventFlags(rawValue: commandControlMask)
+    let space = CGEventSource(stateID: .hidSystemState)
+    let keyDown = CGEvent(keyboardEventSource: space, virtualKey: 49 as CGKeyCode, keyDown: true)
+    keyDown?.flags = commandControlMaskFlags
+    keyDown?.post(tap: .cghidEventTap)
+    let keyUp = CGEvent(keyboardEventSource: space, virtualKey: 49 as CGKeyCode, keyDown: false)
+    keyUp?.flags = commandControlMaskFlags
+    keyUp?.post(tap: .cghidEventTap)
 }
