@@ -23,9 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(togglePopover(_:))
         }
         authVC.delegate = self
+        popover.behavior = NSPopover.Behavior.transient
         mainVC.delegate = self
-        if let token: Auth = dependencies.storageService.getObject(at: AppConstants.Keychain.token) {
-            print(token)
+
+        if (dependencies.storageService.getObject(at: AppConstants.Keychain.token) as Auth?) != nil {
             popover.contentViewController = mainVC
         } else {
             popover.contentViewController = authVC
@@ -72,8 +73,14 @@ var emojis: [Emoji] = {
             let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
             return try decoder.decode([Emoji].self, from: data)
         } catch let error {
-            print(error)
+            debug(error)
         }
     }
     return []
 }()
+
+func debug(_ value: Any) {
+    #if DEBUG
+        print("🤙 Debug: \(value)")
+    #endif
+}

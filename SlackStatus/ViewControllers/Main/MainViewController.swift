@@ -68,6 +68,10 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
         }
     }
 
+    @IBAction func quitButton(_ sender: Any) {
+        exit(0)
+    }
+
     @objc func buttonPressed(button: NSButton) {
         let item = array[button.tag]
         textField.stringValue = item.title
@@ -100,7 +104,7 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
             case let .success(profile):
                 self?.handleProfile(profile)
             case let .failure(message):
-                print("Error response: \(message)")
+                debug("Error response: \(message)")
             }
             DispatchQueue.main.async {
                 self?.delegate?.didFinish()
@@ -116,7 +120,7 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
             case let .success(profile):
                 self?.handleProfile(profile)
             case let .failure(message):
-                print("Error response: \(message)")
+                debug("Error response: \(message)")
             }
             DispatchQueue.main.async {
                 self?.isLoading(false)

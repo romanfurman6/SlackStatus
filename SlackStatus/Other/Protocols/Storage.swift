@@ -21,7 +21,7 @@ extension Keychain: KeychainStorage {
                 let data = try self.getData(key)
                 return data
             } catch let error {
-                print("\(error.localizedDescription)")
+                debug("\(error.localizedDescription)")
             }
             return nil
         }
@@ -30,7 +30,7 @@ extension Keychain: KeychainStorage {
                 guard let data = newValue else { return }
                 try self.set(data, key: key)
             } catch let error {
-                print("\(error.localizedDescription)")
+                debug("\(error.localizedDescription)")
             }
         }
     }
@@ -41,7 +41,7 @@ extension Keychain: KeychainStorage {
                 let string = try self.getString(key)
                 return string
             } catch let error {
-                print("\(error.localizedDescription)")
+                debug("\(error.localizedDescription)")
             }
             return nil
         }
@@ -50,7 +50,7 @@ extension Keychain: KeychainStorage {
                 guard let string = newValue else { return }
                 try self.set(string, key: key)
             } catch let error {
-                print("\(error.localizedDescription)")
+                debug("\(error.localizedDescription)")
             }
         }
     }
@@ -59,7 +59,7 @@ extension Keychain: KeychainStorage {
         do {
             try self.removeAll()
         } catch let error {
-            print("\(error.localizedDescription)")
+            debug("\(error.localizedDescription)")
         }
     }
 }

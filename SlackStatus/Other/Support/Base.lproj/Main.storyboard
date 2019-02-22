@@ -733,11 +733,11 @@
                                 </connections>
                             </button>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXG-5Q-I3g">
-                                <rect key="frame" x="22" y="22" width="100" height="68"/>
+                                <rect key="frame" x="22" y="26" width="100" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </stackView>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-Dh-wQe">
-                                <rect key="frame" x="144" y="22" width="100" height="68"/>
+                                <rect key="frame" x="144" y="26" width="100" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kOP-AB-ctQ">
@@ -765,6 +765,17 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zfm-Oi-Na7">
+                                <rect key="frame" x="218" y="3" width="44" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Quit?" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fmU-nl-0N0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="quitButton:" target="QRy-fz-vY0" id="PIa-wY-RXG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

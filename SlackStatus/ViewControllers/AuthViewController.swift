@@ -43,7 +43,7 @@ final class AuthViewController: NSViewController, MainStoryboardInit {
             case let .success(auth):
                 self?.storageService.storeObject(auth, for: AppConstants.Keychain.token)
             case let .failure(message):
-                print(message)
+                debug(message)
             }
             DispatchQueue.main.async {
                 self?.isLoading(false)
