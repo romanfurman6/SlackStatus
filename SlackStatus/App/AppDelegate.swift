@@ -23,7 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(togglePopover(_:))
         }
         authVC.delegate = self
-        popover.behavior = NSPopover.Behavior.transient
         mainVC.delegate = self
 
         if (dependencies.storageService.getObject(at: AppConstants.Keychain.token) as Auth?) != nil {
@@ -31,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             popover.contentViewController = authVC
         }
-
     }
 
     @objc func togglePopover(_ sender: Any?) {
