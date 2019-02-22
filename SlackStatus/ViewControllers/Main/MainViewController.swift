@@ -20,7 +20,7 @@ protocol MainViewControllerDelegate: class {
     func didFinish()
 }
 
-class MainViewController: NSViewController, MainStoryboardInit {
+class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDelegate {
 
     @IBOutlet private weak var textField: NSTextField!
     @IBOutlet private weak var welcomeLabel: NSTextField!
@@ -43,6 +43,7 @@ class MainViewController: NSViewController, MainStoryboardInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViews()
+        fakeTextField.delegate = self
         fakeTextField.alphaValue = 0
         emojiButton.action = #selector(emojiButtonPressed(button:))
         emojiLabel.usesSingleLineMode = true
@@ -83,16 +84,9 @@ class MainViewController: NSViewController, MainStoryboardInit {
         fakeTextField.stringValue = " "
         fakeTextField.becomeFirstResponder()
         openEmojiPicker()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//
-//        })
     }
 
     @IBAction func saveButtonTapped(_ sender: Any) {
-//        textField.window?.makeFirstResponder(nil)
-//        emojiLabel.isEditable = true
-//        emojiLabel.focusRingType = .none
-//        emojiLabel.becomeFirstResponder()
         setStatus(with: textField.stringValue, and: emojiLabel.stringValue)
     }
 
@@ -150,7 +144,14 @@ class MainViewController: NSViewController, MainStoryboardInit {
             activityIndicator.stopAnimation(nil)
         }
     }
-    
+
+    func controlTextDidChange(_ obj: Notification) {
+        let object = obj.object as! NSTextField
+        let value = object.stringValue
+        emojiLabel.stringValue = value
+        fakeTextField.window?.makeFirstResponder(nil)
+        fakeTextField.stringValue = ""
+    }
 }
 
 private func openEmojiPicker() {

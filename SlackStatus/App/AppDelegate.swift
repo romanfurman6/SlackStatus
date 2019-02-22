@@ -65,3 +65,15 @@ extension AppDelegate: MainViewControllerDelegate {
 }
 
 let dependencies = Dependencies()
+var emojis: [Emoji] = {
+    let decoder = JSONDecoder()
+    if let path = Bundle.main.path(forResource: "slack_to_unicode", ofType: "json") {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            return try decoder.decode([Emoji].self, from: data)
+        } catch let error {
+            print(error)
+        }
+    }
+    return []
+}()

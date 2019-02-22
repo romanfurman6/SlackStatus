@@ -11,6 +11,40 @@ struct Auth {
     let accessToken: String
 }
 
+struct Emoji {
+    let unified: String
+    let shortName: String
+    let available: Bool
+}
+
+extension Emoji: Decodable {
+
+    enum CodingKeys: String, CodingKey {
+        case unified = "unified"
+        case shortName = "short_name"
+        case available = "has_img_apple"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let unifiedString = try container.decode(String.self, forKey: .unified)
+
+        let symbols = unifiedString.split(separator: "-")
+        var string = ""
+        for symbol in symbols {
+            guard
+                let uint32 = UInt32(symbol, radix: 16),
+                let unidcode = UnicodeScalar(uint32)
+            else { fatalError() }
+            string += "\(unidcode)"
+        }
+
+        unified = string
+        shortName = try container.decode(String.self, forKey: .shortName)
+        available = try container.decode(Bool.self, forKey: .available)
+    }
+}
+
 extension Auth: Codable {
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
@@ -48,7 +82,10 @@ extension Profile: Codable {
         let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .profile)
         name = try nestedContainer.decode(String.self, forKey: .name)
         status = try nestedContainer.decode(String.self, forKey: .status)
-        emoji = slackToUnicode(with: try nestedContainer.decode(String.self, forKey: .emoji)) ?? "🚫"
+        let shortName = try nestedContainer
+            .decode(String.self, forKey: .emoji)
+            .replacingOccurrences(of: ":", with: "")
+        emoji = slackToUnicode(with: shortName) ?? "🚫"
         expiration = try nestedContainer.decode(Int.self, forKey: .expiration)
     }
 
@@ -64,24 +101,7 @@ extension Profile: Codable {
 }
 
 private func slackToUnicode(with value: String) -> String? {
-
-    if let path = Bundle.main.path(forResource: "slack_to_unicode", ofType: "json") {
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            let dictionary = json as! [String: String]
-            guard
-                let emojiUnicode = dictionary[value],
-                let charCode = UInt32(emojiUnicode, radix: 16),
-                let unicode = UnicodeScalar(charCode)
-            else { return nil }
-
-            return String(unicode)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    return nil
+    return emojis.first(where: { $0.shortName == value && $0.available })?.unified
 }
 
 protocol APIClientProtocol {
