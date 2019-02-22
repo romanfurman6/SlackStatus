@@ -37,7 +37,6 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
 
     private let storage: StorageServiceProtocol = dependencies.storageService
     private let userService: UserServiceProtocol = dependencies.userService
-
     private var profile: Profile?
 
     override func viewDidLoad() {
@@ -128,7 +127,7 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
     private func handleProfile(_ profile: Profile) {
         self.profile = profile
         DispatchQueue.main.async {
-            self.welcomeLabel.stringValue = "Hello, " + (profile.name)
+            self.welcomeLabel.stringValue = "Hey " + (profile.name)
             self.textField.stringValue = profile.status
             self.emojiLabel.stringValue = profile.emoji
         }

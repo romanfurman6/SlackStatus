@@ -10,7 +10,7 @@ import Foundation
 typealias Result = APIClient.Result
 
 protocol UserServiceProtocol {
-    func authorize(with code: String, handler: @escaping (Result<String>) -> Void)
+    func authorize(with code: String, handler: @escaping (Result<Auth>) -> Void)
     func fetchProfile(handler: @escaping (Result<Profile>) -> Void)
     func updateProfile(with profile: Profile, handler: @escaping (Result<Profile>) -> Void)
 }
@@ -25,7 +25,7 @@ class UserService: UserServiceProtocol {
         self.apiClient = apiClient
     }
 
-    func authorize(with code: String, handler: @escaping (Result<String>) -> Void) {
+    func authorize(with code: String, handler: @escaping (Result<Auth>) -> Void) {
 
         let target = ApiTarget.authorize(code: code)
         let url = target.url
