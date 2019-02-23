@@ -2,6 +2,10 @@
 
 *Mac OS app for changing "Slack" user status.*
 
+## Support
+
+*min: macOS 10.14 (Mojave)*
+
 ## Install
 1) Double click on SlackStatus
 2) Sign-in in workspace
