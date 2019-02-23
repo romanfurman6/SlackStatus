@@ -4,7 +4,8 @@
 
 ## Support
 
-*min: macOS 10.14 (Mojave)*
+min: macOS 10.14 (Mojave)
+*because of an issue with default emoji picker in previous macOS versions*
 
 ## Install
 1) Double click on SlackStatus
