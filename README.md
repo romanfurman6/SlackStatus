@@ -1,4 +1,4 @@
-# SlackStatus
+# SlackStatus <img src="https://github.com/romanfurman6/SlackStatus/blob/master/SlackStatus/Other/Support/Assets.xcassets/slack.imageset/slack_1_32x32.png?raw=true" height="32" width="32"/>
 
 *Mac OS app for changing "Slack" status.*
 
