@@ -20,7 +20,7 @@ min: macOS 10.14 (Mojave)
 ## Plans
 1. Workspace emojis
 2. Emoji picker (native macOS picker available for now) + closing window if it's not active
-3. Design of app
+3. Design
 4. Latest status
 5. Multiple workspaces
 6. Status suggestions
