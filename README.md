@@ -23,3 +23,7 @@ min: macOS 10.14 (Mojave)
 3. Emoji picker (native macOS picker available for now) + closing window if it's not active
 4. Latest status
 5. Multiple workspaces
+
+## Licenses
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
