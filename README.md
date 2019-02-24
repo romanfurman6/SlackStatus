@@ -1,6 +1,6 @@
 # SlackStatus
 
-*Mac OS app for changing "Slack" user status.*
+*Mac OS app for changing "Slack" status.*
 
 ## Support
 
@@ -20,6 +20,6 @@ min: macOS 10.14 (Mojave)
 ## Plans
 1. Workspace emojis
 2. New design
-3. Emoji picker (native macOS picker available for now)
+3. Emoji picker (native macOS picker available for now) + closing window if it's not active
 4. Latest status
 5. Multiple workspaces
