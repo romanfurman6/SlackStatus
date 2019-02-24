@@ -18,13 +18,15 @@ min: macOS 10.14 (Mojave)
 <img src="https://github.com/romanfurman6/SlackStatus/blob/master/Screenshots/2.png?raw=true" height="480" width="379"/>
 
 ## Plans
-1. Workspace emojis
-2. Emoji picker (native macOS picker available for now) + closing window if it's not active
-3. Design
-4. Latest status
-5. Multiple workspaces
-6. Status suggestions
-7. Scheduling
+1. Emoji picker (native macOS picker available for now) + closing window if it's not active
+2. DND observe
+3. Workspace emojis
+4. Design
+5. Latest status
+6. Multiple workspaces
+7. Status suggestions
+8. Scheduling
+
 ...
 
 ## Licenses
