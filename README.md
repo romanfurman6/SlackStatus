@@ -16,3 +16,10 @@ min: macOS 10.14 (Mojave)
 ## Screenshots
 <img src="https://github.com/romanfurman6/SlackStatus/blob/master/Screenshots/1.png?raw=true" height="256" width="268"/>
 <img src="https://github.com/romanfurman6/SlackStatus/blob/master/Screenshots/2.png?raw=true" height="480" width="379"/>
+
+## Plans
+1. Workspace emojis
+2. New design
+3. Emoji picker (native macOS picker available for now)
+4. Latest status
+5. Multiple workspaces
