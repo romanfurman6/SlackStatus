@@ -59,7 +59,9 @@ extension AppDelegate: AuthViewControllerDelegate {
 
 extension AppDelegate: MainViewControllerDelegate {
     func didFinish() {
-        closePopover(sender: nil)
+        #if !DEBUG
+            closePopover(sender: nil)
+        #endif
     }
 }
 
