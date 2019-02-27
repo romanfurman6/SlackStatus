@@ -1,12 +1,12 @@
-# SlackStatus <img src="https://github.com/romanfurman6/SlackStatus/blob/master/SlackStatus/Other/Support/Assets.xcassets/slack.imageset/slack_1_32x32.png?raw=true" height="25" width="25"/>
+# SlackStatus <img src="https://github.com/romanfurman6/SlackStatus/blob/master/Screenshots/icon.png?raw=true" height="25" width="25"/>
 
-*Mac OS app for changing "Slack" status.*
+*Mac OS app for updating status in "Slack" workspace .*
 
 ## Support
 
 min: macOS 10.14 (Mojave)
 
-*because of an issue with default emoji picker in previous macOS versions*
+*Why? Because of issue with default emoji picker in previous macOS versions*
 
 ## Install
 1) Double click on SlackStatus
@@ -18,11 +18,8 @@ min: macOS 10.14 (Mojave)
 <img src="https://github.com/romanfurman6/SlackStatus/blob/master/Screenshots/2.png?raw=true" height="480" width="379"/>
 
 ## Plans
-1. Workspace emojis
-2. New design
-3. Emoji picker (native macOS picker available for now) + closing window if it's not active
-4. Latest status
-5. Multiple workspaces
+
+[Features](https://github.com/romanfurman6/SlackStatus/projects/1)
 
 ## Licenses
 
