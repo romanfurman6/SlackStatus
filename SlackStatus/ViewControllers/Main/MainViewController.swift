@@ -16,6 +16,8 @@ let array = [
     StatusView.Model(title: "Office", emoji: "🏢")
 ]
 
+let doNotDisturbStatus = StatusView.Model(title: "Do not disturb", emoji: "🌚")
+
 protocol MainViewControllerDelegate: class {
     func didFinish()
 }
@@ -38,15 +40,15 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
     private let storage: StorageServiceProtocol = dependencies.storageService
     private let userService: UserServiceProtocol = dependencies.userService
     private var profile: Profile?
+    private var isIgnoringDND = true
+    private var lastSavedProfile: Profile?
+    private var isLoadingState = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDNDObserve()
         setupStackViews()
-        fakeTextField.delegate = self
-        fakeTextField.alphaValue = 0
-        emojiButton.action = #selector(emojiButtonPressed(button:))
-        emojiLabel.usesSingleLineMode = true
-        emojiLabel.alignment = NSTextAlignment.center
+        setupEmojisPicker()
     }
 
     override func viewDidAppear() {
@@ -54,7 +56,49 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
         fetchProfile()
     }
 
-    func setupStackViews() {
+    @IBAction func quitButton(_ sender: Any) {
+        exit(0)
+    }
+
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        delegate?.didFinish()
+    }
+
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        setStatus(with: textField.stringValue, and: emojiLabel.stringValue)
+    }
+
+    @objc func buttonPressed(button: NSButton) {
+        let item = array[button.tag]
+        textField.stringValue = item.title
+        emojiLabel.stringValue = item.emoji
+    }
+
+    private func handleProfile(_ profile: Profile) {
+        self.profile = profile
+        if profile.status != doNotDisturbStatus.title {
+            self.lastSavedProfile = profile
+        }
+        DispatchQueue.main.async {
+            self.welcomeLabel.stringValue = "Hey " + (profile.name)
+            self.textField.stringValue = profile.status
+            self.emojiLabel.stringValue = profile.emoji
+        }
+        storage.storeObject(profile, for: AppConstants.Keychain.profile)
+    }
+
+    private func isLoading(_ value: Bool) {
+        isLoadingState = value
+        activityIndicator.isHidden = !value
+        saveButton.isEnabled = !value
+        if value {
+            activityIndicator.startAnimation(nil)
+        } else {
+            activityIndicator.stopAnimation(nil)
+        }
+    }
+
+    private func setupStackViews() {
         array.enumerated().forEach { (offset, model) in
             let view = StatusView.initFromNIB()
             view.configure(with: model)
@@ -68,37 +112,15 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
         }
     }
 
-    @IBAction func quitButton(_ sender: Any) {
-        exit(0)
-    }
+    // MARK: Networking
 
-    @objc func buttonPressed(button: NSButton) {
-        let item = array[button.tag]
-        textField.stringValue = item.title
-        emojiLabel.stringValue = item.emoji
-    }
-
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        delegate?.didFinish()
-    }
-
-    @objc func emojiButtonPressed(button: NSButton) {
-        textField.window?.makeFirstResponder(nil)
-        fakeTextField.stringValue = " "
-        fakeTextField.becomeFirstResponder()
-        openEmojiPicker()
-    }
-
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        setStatus(with: textField.stringValue, and: emojiLabel.stringValue)
-    }
-
-    private func setStatus(with status: String, and emoji: String) {
+    private func setStatus(with status: String, and emoji: String, shouldSave: Bool = true) {
         isLoading(true)
         profile?.status = status
         profile?.emoji = emoji
         profile?.expiration = 0
         guard let profile = profile else { fatalError() }
+        if shouldSave { self.lastSavedProfile = profile }
         userService.updateProfile(with: profile) { [weak self] (result) in
             switch result {
             case let .success(profile):
@@ -128,24 +150,14 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
         }
     }
 
-    private func handleProfile(_ profile: Profile) {
-        self.profile = profile
-        DispatchQueue.main.async {
-            self.welcomeLabel.stringValue = "Hey " + (profile.name)
-            self.textField.stringValue = profile.status
-            self.emojiLabel.stringValue = profile.emoji
-        }
-        storage.storeObject(profile, for: AppConstants.Keychain.profile)
-    }
+    // MARK: Emojis
 
-    private func isLoading(_ value: Bool) {
-        activityIndicator.isHidden = !value
-        saveButton.isEnabled = !value
-        if value {
-            activityIndicator.startAnimation(nil)
-        } else {
-            activityIndicator.stopAnimation(nil)
-        }
+    private func setupEmojisPicker() {
+        fakeTextField.delegate = self
+        fakeTextField.alphaValue = 0
+        emojiButton.action = #selector(emojiButtonPressed(button:))
+        emojiLabel.usesSingleLineMode = true
+        emojiLabel.alignment = NSTextAlignment.center
     }
 
     func controlTextDidChange(_ obj: Notification) {
@@ -154,6 +166,61 @@ class MainViewController: NSViewController, MainStoryboardInit, NSTextFieldDeleg
         emojiLabel.stringValue = value
         fakeTextField.window?.makeFirstResponder(nil)
         fakeTextField.stringValue = ""
+    }
+
+    @objc private func emojiButtonPressed(button: NSButton) {
+        textField.window?.makeFirstResponder(nil)
+        fakeTextField.stringValue = " "
+        fakeTextField.becomeFirstResponder()
+        openEmojiPicker()
+    }
+
+    // MARK: DND
+
+    private let notificationEnabled = NSNotification.Name("_NSDoNotDisturbEnabledNotification")
+    private let notificationDisabled = NSNotification.Name("_NSDoNotDisturbDisabledNotification")
+    private var dndTask: DispatchWorkItem?
+
+    @IBAction private func ignoreDNDTaps(_ sender: Any) {
+        isIgnoringDND = !isIgnoringDND
+    }
+
+    @objc private func handleDND(_ notification: NSNotification) {
+        if isIgnoringDND || isLoadingState { return }
+
+        let enabled: Bool
+        switch notification.name {
+        case self.notificationEnabled:
+            enabled = true
+        case self.notificationDisabled:
+            enabled = false
+        default: fatalError()
+        }
+
+        self.dndTask?.cancel()
+
+        let task = DispatchWorkItem(block: { [weak self] in
+            print(notification)
+            self?.dndStatus(with: enabled)
+        })
+
+        self.dndTask = task
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75, execute: task)
+    }
+
+    private func setupDNDObserve() {
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(handleDND(_:)), name: notificationEnabled, object: nil)
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(handleDND(_:)), name: notificationDisabled, object: nil)
+    }
+
+    private func dndStatus(with enabled: Bool) {
+        if !enabled && lastSavedProfile == nil { return }
+
+        let status = enabled ? doNotDisturbStatus.title : lastSavedProfile!.status
+        let emoji = enabled ? doNotDisturbStatus.emoji : lastSavedProfile!.emoji
+
+        setStatus(with: status, and: emoji, shouldSave: false)
     }
 }
 
